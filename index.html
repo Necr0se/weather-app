@@ -42,7 +42,7 @@
             but.addEventListener("click", ()=>{
                 const town = document.getElementById("townInput").value;
                 const apiKey = "441a78fcecdf4275a5e154459241907";
-                const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${town}`;
+                const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${town}`;
     
                 fetch(url)
                 .then(response => response.json())
