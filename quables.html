@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-with, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: burlywood;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+            background-color: cadetblue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Weather App</h1>
+        <p>Enter a town name to get the weather:</p>
+        <input type="text" id="townInput" placeholder="Enter town name">
+        <button id="weathertrigger">Get Weather</button>
+        <div id="weatherInfo"></div>
+    </div>
+
+     <script>
+            const but = document.getElementById("weathertrigger");
+
+            but.addEventListener("click", ()=>{
+                const town = document.getElementById("townInput").value;
+                const apiKey = "441a78fcecdf4275a5e154459241907";
+                const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${town}`;
+    
+                fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const weatherInfo = document.getElementById("weatherInfo");
+                    console.log(data)
+    
+                    const {location, current } = data;
+                    const { condition, temp_c, temp_f } = current;
+    
+                    weatherInfo.innerHTML = `
+                        <p>Weather in ${location.name}</p>
+                        <p>Current Condition ${temp_c}°C</p>
+                        <div>
+                            <p>${condition.text}</p>
+                            <img src="${condition.icon}" alt="${condition.text}" />
+                        </div>
+                        `;
+                        // <p>Temperature: ${data.main.temp} °C</p>
+                        // <p>Weather: ${data.weather[0].description}</p>
+                })
+                .catch(error => {
+                    console.error("Error fetching weather data");
+                    const weatherInfo = document.getElementById("weatherInfo");
+                    weatherInfo .innerHTML = "<p>Failed to fetch weather data. Please try again later</p>";
+                });
+
+            })
+        
+ </script> 
+
+</body>
+</html>
