@@ -30,7 +30,7 @@
 
     <div class="container">
         <h1>Weather App</h1>
-        <p>Enter a town name to get the weather:</p>
+        <p>Enter a city name to get the weather:</p>
         <input type="text" id="townInput" placeholder="Enter town name">
         <button id="weathertrigger">Get Weather</button>
         <div id="weatherInfo"></div>
@@ -54,7 +54,8 @@
                     const { condition, temp_c, temp_f } = current;
     
                     weatherInfo.innerHTML = `
-                        <p>Weather in ${location.name}</p>
+                        <p>Weather in ${location.name}, ${location.country}</p>
+                        <p>Current date, time: ${location.localtime}</p>
                         <p>Current Condition ${temp_c}°C</p>
                         <div>
                             <p>${condition.text}</p>
